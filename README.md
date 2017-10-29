@@ -50,7 +50,6 @@ for (int i = 0; i < sizeX; i++) {
 ```
 Side Note: As seen above, your braces should close on the same level of indentation as their opening statement.
 ## Organization
-```
 In classes, accessors and mutators should be defined at the end of the class, getter then setter, in the order that the members are declared. 
 ```
 public class Example {
