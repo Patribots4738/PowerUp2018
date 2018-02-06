@@ -16,9 +16,10 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 	public double getAngle(){
 		double angle = gyro.getAngle();
 		
-		return angle;//average.average(angle);
-		//angle =(Math.abs(angle / 360) - (int) (Math.abs(angle / 360))); //ASK JACOB what the "int" portion of the code does
-		//return average.average(angle * 360);
+		//return angle;
+		average.average(angle);
+		angle =(Math.abs(angle / 360) - (int) (Math.abs(angle / 360))); //ASK JACOB what the "int" portion of the code does
+		return average.average(angle * 360);
 		
 	}
 	
