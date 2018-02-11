@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+
 <<<<<<< HEAD
 package autonomous;
 
@@ -7,13 +8,12 @@ import wrapper.Drive;
 import wrapper.Encoder;
 import wrapper.Gyro;
 import wrapper.Timer;
+import autonomous.Smashboard;
 
 public class Autonomous {
-	
-	
+
 	// DO NOT CTRL-SHIFT-F THIS DOCUMENT!!!!!!
-	
-	
+
 	// these coordinates are for when the switch
 	// side we want to go to is on the right
 	// for left switch side just make the 66s (and only the 66s) negative
@@ -25,12 +25,11 @@ public class Autonomous {
 	// to our side
 	Position goingAround[] = { new Position(100, 210), new Position(66, 210), new Position(66, 196) };
 
-	
-	//and these are for testing the autonomous
-	Position autonomousTestingStuff[]= { /* this is for 45 degree turns*/new Position(50 , 50)
-			, /* this is for moving straight forward*/ new Position( 0, 50 ) 
-			, /* this is for 90 degree turns*/ new Position( -50 , 0) 
-			,/* this is for when you don't want it to move or rotate */ new Position(0,0) };
+	// and these are for testing the autonomous
+	Position autonomousTestingStuff[] = { /* this if for 45 degree turns */new Position(50, 50),
+			/* this is for moving straight forward */ new Position(0, 50),
+			/* this is for 90 degree turns */ new Position(50, 0),
+			/* this is for when you don't want it to move or rotate */ new Position(0, 0) };
 
 	Position destPos = autonomousTestingStuff[2], // we need to have it get the destPos from the smashboard
 			robitPos = new Position();
@@ -62,23 +61,30 @@ public class Autonomous {
 
 	// this makes the robot move where we want it to, and then tells it that its
 	// where we told it to go
-	
+
 	public void gyroTest() {
-		System.out.print("the gyro angle is: " +gyro.getAngle() + " \n");
+		System.out.println("the gyro angle is: " + gyro.getAngle() + "  ");
 	}
+
 	public void ITSALIVE() {
-		
-		updateAngle();
-		//updatePos();
-		//	System.out.println(" the distance is: " + Trigulator.distance(robitPos, destPos));
+
+		// these commands will have the driver station give you values
+		System.out.println("the distance is: " + Trigulator.distance(robitPos, destPos));
 		Trigulator.angleTest(robitPos, destPos);
+		System.out.println("the move direction is: " + move.moveDirection(robitPos, destPos));
 		gyroTest();
-		//System.out.println("the motor speed is: " + move.distanceToSpeed((Math.min(1, Trigulator.deltaAngle(robitPos, destPos)) / 90) , 0.25) + "  ");
-		move.rotate(Trigulator.deltaAngle(robitPos, destPos), 0.25);
-		// if (Math.abs(Trigulator.deltaAngle(robitPos, destPos)) <= Trigulator.angle(robitPos, destPos) +1 &&(Math.abs(Trigulator.deltaAngle(robitPos , destPos)) - 1) >= Trigulator.angle(robitPos, destPos) - 1) {
-		//move.move(Trigulator.distance(robitPos, destPos), 0.25 , move.moveDirection(robitPos, destPos));
-		// }
-		
+
+		Smashboard.sendRobotPos(robitPos);
+		if (encoderL.getSpeed() <= 0.5 && encoderL.getSpeed() >= -0.5) {
+			updateAngle();
+			move.rotate(Trigulator.deltaAngle(robitPos, destPos), 0.25);
+		}
+		if (encoderL.getSpeed() <= 0.5 && encoderL.getSpeed() >= -0.5 && Trigulator.deltaAngle(robitPos, destPos) <= 1 && Trigulator.deltaAngle(robitPos, destPos) >= -1) {
+						
+			move.move(Trigulator.distance(robitPos, destPos), 0.25, move.moveDirection(robitPos, destPos));
+			updatePos();
+		}
+
 	}
 
 	// this tells the robot where it is
@@ -92,7 +98,6 @@ public class Autonomous {
 	// this tells the robot where it's facing
 	public void updateAngle() {
 		robitPos.setTheta(gyro.getAngle());
-	}
 =======
 package autonomous;
 
@@ -190,9 +195,9 @@ public class Autonomous {
 	// this tells the robot where it's facing
 	public void updateAngle() {
 		robitPos.setTheta(gyro.getAngle());
-	}
->>>>>>> 1b23ae31dc1bd6f5c252f5e1881d54bb5c874b65
+>>>>>>> 74a321d8aafe0bfe4a00143cc13e8a0bbe9fd04d
 =======
+
 package autonomous;
 
 import autonomous.MoveCommands;
@@ -289,6 +294,6 @@ public class Autonomous {
 	// this tells the robot where it's facing
 	public void updateAngle() {
 		robitPos.setTheta(gyro.getAngle());
+>>>>>>> 74a321d8aafe0bfe4a00143cc13e8a0bbe9fd04d
 	}
->>>>>>> 1b23ae31dc1bd6f5c252f5e1881d54bb5c874b65
 }
