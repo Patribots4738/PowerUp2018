@@ -1,4 +1,3 @@
-
 package autonomous;
 
 import autonomous.MoveCommands;
@@ -6,6 +5,7 @@ import wrapper.Drive;
 import wrapper.Encoder;
 import wrapper.Gyro;
 import wrapper.Timer;
+import autonomous.Smashboard;
 
 public class Autonomous {
 	
@@ -67,20 +67,31 @@ public class Autonomous {
 	}
 	public void ITSALIVE() {
 		
-		updateAngle();
-		//updatePos();
+		// these commands will have the driver station give you values
+		System.out.println("the distance is: " + Trigulator.distance(robitPos, destPos));
 		Trigulator.angleTest(robitPos, destPos);
-		
+		System.out.println("the move direction is: " + move.moveDirection(robitPos, destPos));
 		gyroTest();
-		System.out.print(Math.min(1, Trigulator.deltaAngle(robitPos, destPos) / 90) + "  ");
-		System.out.println(Trigulator.deltaAngle(robitPos, destPos) / 90);
 
-		move.rotate(Trigulator.deltaAngle(robitPos, destPos), 0.5);
-		//System.out.println(Trigulator.deltaAngle(robitPos,  destPos));
-		// System.out.println("Gyro " + robitPos.getTheta());
-		// if (Math.abs(Trigulator.deltaAngle(robitPos, destPos)) <= Trigulator.angle(robitPos, destPos) +1 &&(Math.abs(Trigulator.deltaAngle(robitPos , destPos)) - 1) >= Trigulator.angle(robitPos, destPos) - 1) {
-		// move.move(Trigulator.distance(robitPos, destPos), 0.25);
-		// }
+		Smashboard.sendRobotPos(robitPos);
+		
+		updateAngle();
+		move.rotate(Trigulator.deltaAngle(robitPos, destPos), 0.4);
+		move.move(Trigulator.distance(robitPos, destPos), 0.25, move.moveDirection(robitPos, destPos));
+		if(Math.abs(Trigulator.deltaAngle(robitPos, destPos)) < 0.5 ) {
+			//move.move(Trigulator.distance(robitPos, destPos), 0.25, move.moveDirection(robitPos, destPos));
+			updatePos();
+		}
+		
+		/*if (encoderL.getSpeed() <= 0.5 && encoderL.getSpeed() >= -0.5) {
+			updateAngle();
+			move.rotate(Trigulator.deltaAngle(robitPos, destPos), 0.25);
+		}
+		if (encoderL.getSpeed() <= 0.5 && encoderL.getSpeed() >= -0.5 && Trigulator.deltaAngle(robitPos, destPos) <= 1 && Trigulator.deltaAngle(robitPos, destPos) >= -1) {
+						
+			move.move(Trigulator.distance(robitPos, destPos), 0.25, move.moveDirection(robitPos, destPos));
+			updatePos();
+		}*/
 		
 	}
 
