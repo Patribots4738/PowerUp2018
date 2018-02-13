@@ -26,7 +26,8 @@ public class MoveCommands {
 	}
 	
 	public double distanceToSpeed(double x, double s) {
-		return (((Math.sin((Math.PI * 0.5) * (Math.sqrt(Math.pow((Math.abs(x)), (2d/3d))))))) * ((Math.abs(x) / x))) * s;
+		double t = 0.7;
+		return (x * (Math.pow(Math.exp(1), Math.abs((x/t))))) * s ;
 	}
 
 	// this makes the robot rotate a certain amount, in degrees

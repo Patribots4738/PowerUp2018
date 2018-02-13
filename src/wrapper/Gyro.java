@@ -19,7 +19,7 @@ public class Gyro {
 	public double getAngle() {
 		double angle = gyro.getAngle() * conversionFactor;
 		// return angle;
-		//angle = angle % 360;
+		angle = angle % 360;
 		return (average.average(angle));
 	}
 
