@@ -2,7 +2,7 @@ package org.usfirst.frc.team4738.robot;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4738.robot.Arms;
+import wrapper.Arms;
 import wrapper.Timer;
 
 public class Elevator {
