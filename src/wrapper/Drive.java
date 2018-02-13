@@ -1,3 +1,4 @@
+
 package wrapper;
 
 import java.util.*;
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Drive {
 
-	private ArrayList<VictorSP> motors = new ArrayList<>();
+	private ArrayList<Spark> motors = new ArrayList<>();
 
 	/**
 	 * This is a constructor you idiot - <3 Jacob
@@ -19,7 +20,7 @@ public class Drive {
 	 */
 	public Drive(int... ports) {
 		for (int port : ports) {
-			VictorSP motor = new VictorSP(port);
+			Spark motor = new Spark(port);
 			motors.add(motor);
 		}
 	}

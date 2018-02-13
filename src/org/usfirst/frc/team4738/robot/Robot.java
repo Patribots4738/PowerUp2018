@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import wrapper.Arms;
 import wrapper.Drive;
 import wrapper.Gamepad;
 import wrapper.ToggleButton;
@@ -14,28 +13,30 @@ import wrapper.XboxController;
 public class Robot extends IterativeRobot {
 	Gamepad gamepad = new Gamepad(0);
 	XboxController xbox = new XboxController(1);
-	ToggleButton toggledState = new ToggleButton();
-	ToggleButton holdButton = new ToggleButton();
 	Compressor compressor = new Compressor(0);
 	Drive drive;
 	Climber winch;
 	Elevator elevator;
-
+	//Autonomous autonomous;
+	
 	@Override
 	public void robotInit() {
-		 drive = new Drive();
+		 drive = new Drive(2, 3);
 		 winch = new Climber(0);
-		 elevator = new Elevator(1, 0, 1);
+		 elevator = new Elevator(1, 1, 0);
+		 //this.autonomous = new Autonomous(drive);
+		// autonomous.reset();
 	}
 
 	@Override
 	public void autonomousInit() {
+	//	autonomous.reset();
 	
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		
+		//autonomous.ITSALIVE();
 	}
 	
 
@@ -49,6 +50,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void testPeriodic() {
-	
+		
 	}
 }
