@@ -21,9 +21,8 @@ public class Gyro {
 		//angle = angle % 360;
 		return (average.average(angle));
 	}
-
-
-	public void reset() {
+  
+  public void reset() {
 		average.reset();
 		gyro.reset();
 	}
