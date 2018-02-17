@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4738.wrapper.vision;
+package vision;
 
 public class VisionObject {
 	public double distanceMagnitude; //The Hypotnuse of distance
