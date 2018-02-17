@@ -1,12 +1,11 @@
 package org.usfirst.frc.team4738.robot;
 
-import org.usfirst.frc.team4738.wrapper.vision.Camera;
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import vision.Camera;
 import wrapper.Drive;
 import wrapper.Gamepad;
 import wrapper.Timer;

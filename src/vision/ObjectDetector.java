@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4738.wrapper.vision;
+package vision;
 
 import java.util.ArrayList;
 

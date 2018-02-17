@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4738.wrapper.vision;
+package vision;
 	
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
