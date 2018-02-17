@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Drive {
 
-	private ArrayList<VictorSP> motors = new ArrayList<>();
+	private ArrayList<Spark> motors = new ArrayList<>();
 
 	/**
 	 * This is a constructor you idiot - <3 Jacob
@@ -19,7 +19,7 @@ public class Drive {
 	 */
 	public Drive(int... ports) {
 		for (int port : ports) {
-			VictorSP motor = new VictorSP(port);
+			Spark motor = new Spark(port);
 			motors.add(motor);
 		}
 	}
@@ -33,9 +33,9 @@ public class Drive {
 	public void linearArcade(double xAxis, double yAxis) {
 		for (int i = 0; i < motors.size(); i++) {
 			if (i % 2 == 0) {
-				motors.get(i).set((yAxis + xAxis));
+				motors.get(i).set(-(yAxis + xAxis));
 			} else {
-				motors.get(i).set(-(yAxis - xAxis));
+				motors.get(i).set((yAxis - xAxis));
 			}
 		}
 	}
@@ -62,12 +62,12 @@ public class Drive {
 	 * @param rightStick
 	 *            x-axis for right joystick
 	 */
-	public void parabolicTank(double leftStick, double rightStick) {
+	public void parabolicTank(double leftStick, double rightStick, double speedMultiplier) {
 		for (int i = 0; i < motors.size(); i++) {
 			if (i % 2 == 0) {
-				motors.get(i).set(leftStick * Math.abs(leftStick));
+				motors.get(i).set(leftStick * Math.abs(leftStick) * speedMultiplier);
 			} else {
-				motors.get(i).set(rightStick * Math.abs(rightStick));
+				motors.get(i).set(rightStick * Math.abs(rightStick) * speedMultiplier);
 			}
 		}
 	}
@@ -78,14 +78,13 @@ public class Drive {
 	 * @param yAxis
 	 *            y-axis for the joystick
 	 */
-	public void parabolicArcade(double xAxis, double yAxis) {
+	public void parabolicArcade(double xAxis, double yAxis, double speedMultiplier) {
 		for (int i = 0; i < motors.size(); i++) {
 			if (i % 2 == 0) {
-				motors.get(i).set((yAxis + xAxis) * Math.abs(yAxis + xAxis));
+				motors.get(i).set((-(yAxis + xAxis)) * Math.abs(yAxis + xAxis) * speedMultiplier);
 			} else {
-				motors.get(i).set(-(yAxis - xAxis) * Math.abs(yAxis - xAxis));
+				motors.get(i).set(((yAxis - xAxis)) * Math.abs((yAxis - xAxis)) * speedMultiplier);
 			}
 		}
 	}
-
 }

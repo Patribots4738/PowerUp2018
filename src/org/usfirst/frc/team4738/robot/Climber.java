@@ -11,9 +11,11 @@ public class Climber {
 	
 	public void set(boolean up, boolean down){
 		if (up == true){
-			winch.set(.5);
+			winch.set(-1);
 		}else if (down == true){
-			winch.set(-.5);
+			winch.set(1);
+		} else {
+			winch.set(0);
 		}
 	}
 }
