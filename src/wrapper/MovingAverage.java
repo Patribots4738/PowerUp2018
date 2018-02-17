@@ -30,4 +30,9 @@ public class MovingAverage {
 	public double getAverage(){
 		return average;
 	}
+	
+	public void reset() {
+		average = 0;
+		values.clear();
+	}
 }//zach here commenting to inform you that i actually did something useful! i feel accomplished!
