@@ -22,7 +22,4 @@ public class Trigulator {
 		return angle - a.getTheta();
 	}
 
-	public static void angleTest(Position a, Position b) {
-		System.out.print("the delta angle is: " + deltaAngle(a, b) + "  ");
-	}
 }
