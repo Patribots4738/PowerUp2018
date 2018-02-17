@@ -1,6 +1,8 @@
 package wrapper;
 
 import enums.*;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /**
  * @author Owen
@@ -55,5 +57,9 @@ public class XboxController extends Gamepad implements interfaces.XboxController
 	@Override
 	public boolean getDPad(Directions direction) {
 		return this.getPOV(direction);
+	}
+	
+	public void setRumble(RumbleType type, double rumble){
+		this.setRumble(type, rumble);
 	}
 }

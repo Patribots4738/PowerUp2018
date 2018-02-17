@@ -1,65 +1,77 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package org.usfirst.frc.team4738.robot;
 
+import org.usfirst.frc.team4738.wrapper.vision.Camera;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import wrapper.Drive;
 import wrapper.Gamepad;
+import wrapper.Timer;
+import wrapper.ToggleButton;
 import wrapper.XboxController;
-import autonomous.Autonomous;
-
 
 public class Robot extends IterativeRobot {
+	Gamepad gamepad = new Gamepad(0);
+	XboxController xbox = new XboxController(1);
+	Compressor compressor = new Compressor(0);
 	Drive drive;
-	Autonomous autonomous;
-	XboxController pad = new XboxController(0);
-	
+	Climber winch;
+	Elevator elevator;
+	Timer timer;
+	Camera cam = new Camera();
 
-	/**
-	 * This function is run when the robot is first started up and should be used
-	 * for any initialization code.
-	 */
 	@Override
 	public void robotInit() {
-		this.drive = new Drive(6, 7, 9, 8);
-		this.autonomous = new Autonomous(drive);
-		autonomous.reset();
+		 drive = new Drive(2, 3);
+		 winch = new Climber(0);
+		 elevator = new Elevator(1, 0, 1);
+		 timer = new Timer();
+	  	 cam.startCamera();
+	   //cam.detectObjects();
+	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
 	}
 
 	@Override
 	public void autonomousInit() {
-		autonomous.reset();
 	
 	}
 
-	/**
-	 * This function is called periodically during autonomous.
-	 */
 	@Override
 	public void autonomousPeriodic() {
-		autonomous.ITSALIVE();
+		
 	}
+	
 
-	/**
-	 * This function is called periodically during operator control.
-	 */
+	
 	@Override
 	public void teleopPeriodic() {
-		drive.linearArcade(pad.getLeftStick().getX(), 0);
-		System.out.println(pad.getLeftStick().getX());
+		//drive.parabolicArcade((-xbox.getAxis(4) * speedMultiplier), xbox.getAxis(1) * speedMultiplier); used with speedMultiplier
+		drive.parabolicArcade((-xbox.getAxis(4)), xbox.getAxis(1), .75);
+		//drive.linearArcade(-xbox.getLeftStick().getY(), xbox.getRightStick().getX());
+		
+	/*	if(xbox.getToggle(5)){
+			speedMultiplier = .75;
+		}else{
+			speedMultiplier = .5;
+		}
+		*/
+		//drive.speedCap(xbox.getToggle(5), .75);
+		elevator.setLift(gamepad.getAxis(1));
+		elevator.setArms(gamepad.getButton(0));
+		winch.set(gamepad.getButton(2), gamepad.getButton(1));
+		
+	/*	if(timer.wait(105 * 1000)){
+			xbox.setRumble(RumbleType.kRightRumble, 1);
+			xbox.setRumble(RumbleType.kLeftRumble, 1);
+			*/
 	}
+	
 
-	/**
-	 * This function is called periodically during test mode.
-	 */
 	@Override
 	public void testPeriodic() {
+	
 	}
 }
