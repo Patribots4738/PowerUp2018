@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4738.robot;
 
 import autonomous.Autonomous;
+import autonomous.Smashboard;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -12,26 +13,28 @@ import wrapper.Gamepad;
 import wrapper.Timer;
 import wrapper.ToggleButton;
 import wrapper.XboxController;
-
+import org.usfirst.frc.team4738.robot.RobotPosition;
 
 public class Robot extends IterativeRobot {
-	Gamepad gamepad = new Gamepad(0);
+	//Gamepad gamepad = new Gamepad(0);
 	XboxController xbox = new XboxController(1);
 	Compressor compressor = new Compressor(0);
 	Drive drive;
-	Climber winch;
-	Elevator elevator;
+//	Climber winch;
+//	Elevator elevator;
 	Timer timer;
 	Autonomous autonomous;
+	RobotPosition robitPos;
 //	Camera cam = new Camera();
 
 	@Override
 	public void robotInit() {
-		 drive = new Drive(2, 3);
-		 winch = new Climber(0);
-		 elevator = new Elevator(1, 0, 1);
+		 drive = new Drive(6, 7, 9, 8 /*2, 3 */);
+	//	 winch = new Climber(0);
+	//	 elevator = new Elevator(1, 0, 1);
 		 timer = new Timer();
-		 autonomous = new Autonomous(drive);
+		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 18.849);
+		 autonomous = new Autonomous(drive, robitPos);
 	   //cam.startCamera();
 	   //cam.detectObjects();
 	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
@@ -52,9 +55,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		//drive.parabolicArcade((-xbox.getAxis(4) * speedMultiplier), xbox.getAxis(1) * speedMultiplier); used with speedMultiplier
-		drive.parabolicArcade((-xbox.getAxis(4)), xbox.getAxis(1), .75);
+		drive.parabolicArcade(xbox.getLeftStick().getX(), xbox.getLeftStick().getY(), .75);
 		//drive.linearArcade(-xbox.getLeftStick().getY(), xbox.getRightStick().getX());
-		
+		robitPos.updateAnglePos();
 	/*	if(xbox.getToggle(5)){
 			speedMultiplier = .75;
 		}else{
@@ -62,9 +65,9 @@ public class Robot extends IterativeRobot {
 		}
 		*/
 		//drive.speedCap(xbox.getToggle(5), .75);
-		elevator.setLift(gamepad.getAxis(1));
-		elevator.setArms(gamepad.getButton(0));
-		winch.set(gamepad.getButton(2), gamepad.getButton(1));
+	//	elevator.setLift(gamepad.getAxis(1));
+	//	elevator.setArms(gamepad.getButton(0));
+	//	winch.set(gamepad.getButton(2), gamepad.getButton(1));
 		
 	/*	if(timer.wait(105 * 1000)){
 			xbox.setRumble(RumbleType.kRightRumble, 1);
