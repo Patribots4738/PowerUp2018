@@ -11,7 +11,7 @@ public class Autonomous {
 	double RAMMINGSPEED = -0.9;
 	double normalSpeed = 0.5;
 	double safeSpeed = 0.25;
-	double wheelCircumfrence = 18.849;//19.75 * 76/74.87255859375;
+	double wheelCircumfrence = 19.75 * 76/74.87255859375;
 	int moveState = 0;
 	// DO NOT CTRL-SHIFT-F THIS DOCUMENT!!!!!!
 
