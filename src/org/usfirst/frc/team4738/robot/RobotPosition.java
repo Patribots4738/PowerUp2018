@@ -49,9 +49,9 @@ public class RobotPosition extends Position {
 		Smashboard.sendRobotPos(this);
 	}
 
-	public void reset() {
-		setX(0);
-		setY(0);
+	public void reset(double offset) {
+		setX(offset);
+		setY(19);
 		setTheta(0);
 		gyro.reset();
 		encoderR.reset();

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4738.robot;
 
+import autonomous.Autonomous;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -12,6 +13,7 @@ import wrapper.Timer;
 import wrapper.ToggleButton;
 import wrapper.XboxController;
 
+
 public class Robot extends IterativeRobot {
 	Gamepad gamepad = new Gamepad(0);
 	XboxController xbox = new XboxController(1);
@@ -20,7 +22,8 @@ public class Robot extends IterativeRobot {
 	Climber winch;
 	Elevator elevator;
 	Timer timer;
-	Camera cam = new Camera();
+	Autonomous autonomous;
+//	Camera cam = new Camera();
 
 	@Override
 	public void robotInit() {
@@ -28,19 +31,20 @@ public class Robot extends IterativeRobot {
 		 winch = new Climber(0);
 		 elevator = new Elevator(1, 0, 1);
 		 timer = new Timer();
-	  	 cam.startCamera();
+		 autonomous = new Autonomous(drive);
+	   //cam.startCamera();
 	   //cam.detectObjects();
 	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
 	}
 
 	@Override
 	public void autonomousInit() {
-	
+			autonomous.reset();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		
+		autonomous.ITSALIVE();
 	}
 	
 

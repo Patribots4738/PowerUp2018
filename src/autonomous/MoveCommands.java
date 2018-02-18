@@ -8,6 +8,7 @@ public class MoveCommands {
 	double distTillDecceleration = 25.0;
 	double thetaTillDecceleration = 24.0;
 
+	
 	// You have to make sure that one of these has finished before you run the next
 	// one, or everything dies
 
@@ -17,18 +18,17 @@ public class MoveCommands {
 
 	// this makes the robot move, but only in a straight line
 	public void move(double distance, double speedMultiplier, double direction) {
-		double speed = distanceToSpeed(Math.min(1, distance / distTillDecceleration)) * speedMultiplier;
-		drive.linearArcade(0, (direction) * -speed);
+		double speed = (Math.min(1, distanceToSpeed(Math.max(-1, distance / distTillDecceleration)))) * speedMultiplier;
+		System.out.println("the motor speed is: " + (direction * speed));
+		drive.linearArcade(0, (direction) * speed);
 	}
 
 	public double moveDirection(Position a, Position b) {
-		return Math.signum(1 - Trigulator.deltaAngle(a, b));
+		return Math.signum(90 - Trigulator.deltaAngle(a, b));
 	}
 
 	public double distanceToSpeed(double x) {
-	//	return Math.sin((Math.PI / 2) * Math.sqrt(Math.pow(Math.abs(x), 3 / 3))) * (Math.abs(x) / x);  //return x/90;
-	//	return Math.sin(Math.sqrt(Math.pow(Math.abs(x), (9/10)))) * x/Math.abs(x);
-		return x;
+		return Math.sin((Math.PI / 4) * Math.sqrt(Math.pow(Math.abs(x), (2.6 / 5)))) * (1.2 * x / Math.abs(x));
 	}
 
 	// this makes the robot rotate a certain amount, in degrees

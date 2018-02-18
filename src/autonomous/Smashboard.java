@@ -10,4 +10,10 @@ public class Smashboard {
 		String data = (pos.getX() + smashboardHeight) + "," + pos.getY() + "," + pos.getTheta();
 		SmartDashboard.putString("position", data);
 	}
+	
+	public static void sendDestPos(Position pos) {
+		String data = (pos.getX() + smashboardHeight) + "," + pos.getY() + "," + pos.getTheta();
+		SmartDashboard.putString("destination", data);
+	}
+	
 }
