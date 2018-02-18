@@ -5,7 +5,6 @@ import wrapper.Encoder;
 import wrapper.Gyro;
 import wrapper.Timer;
 import autonomous.Smashboard;
-import edu.wpi.first.wpilibj.AnalogInput;
 
 public class RobotPosition extends Position {
 
@@ -29,8 +28,9 @@ public class RobotPosition extends Position {
 		deltaTheta = deltaTheta / 195 * 360;
 		double calcR = -(encoderR.getSpeed() + encoderL.getSpeed()) / 2;
 
-		this.setTheta(this.getTheta() + deltaTheta);
-
+		//this.setTheta(this.getTheta() + deltaTheta);
+		this.setTheta(gyro.getAngle());
+		
 		double deltaYPos = calcR * Math.cos(Math.toRadians(this.getTheta())) * deltaTimer;
 		double deltaXPos = calcR * Math.sin(Math.toRadians(this.getTheta())) * deltaTimer;
 
@@ -43,9 +43,10 @@ public class RobotPosition extends Position {
 
 	// this tells the robot where it is
 	public void updatePos() {
+		double encoderAverage = ( encoderR.getSpeed() + encoderL.getSpeed() ) /2; 
 		double deltaTime = timer.getDeltaTime();
-		this.setY(this.getY() + ((encoderL.getSpeed() * (deltaTime / 1000)) * Math.cos(0)));
-		this.setX(this.getX() + ((encoderL.getSpeed() * (deltaTime / 1000)) * Math.sin(0)));
+		this.setY(this.getY() + ((encoderAverage * (deltaTime / 1000)) * Math.cos(this.getTheta())));
+		this.setX(this.getX() + ((encoderAverage * (deltaTime / 1000)) * Math.sin(this.getTheta())));
 		Smashboard.sendRobotPos(this);
 	}
 
@@ -57,11 +58,24 @@ public class RobotPosition extends Position {
 		encoderR.reset();
 		encoderL.reset();
 	}
+	
+	public void zeroReset() {
+		setX(0);
+		setY(0);
+		setTheta(0);
+		gyro.reset();
+		encoderR.reset();
+		encoderL.reset();
+	}
 
 	// this tells the robot where it's facing
 	public void updateAngle() {
 		this.setTheta(gyro.getAngle());
 		Smashboard.sendRobotPos(this);
+	}
+	
+	public boolean isMoving() {
+		return (encoderL.getSpeed() + encoderR.getSpeed()) / 2 > .5;
 	}
 
 	public void angleTest() {

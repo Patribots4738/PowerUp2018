@@ -1,7 +1,7 @@
 package wrapper;
 
 public class Encoder {
-	public static final double ClicksPerRotation = 256;
+	public static final double ClicksPerRotation = 256;// 2048
 	public edu.wpi.first.wpilibj.Encoder encoder;
 	private double circumference, conversionFactor;
 

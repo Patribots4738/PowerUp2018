@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4738.robot;
 
 import autonomous.Autonomous;
+import autonomous.Smashboard;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -12,7 +13,7 @@ import wrapper.Gamepad;
 import wrapper.Timer;
 import wrapper.ToggleButton;
 import wrapper.XboxController;
-
+import org.usfirst.frc.team4738.robot.RobotPosition;
 
 public class Robot extends IterativeRobot {
 	Gamepad gamepad = new Gamepad(0);
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
 	Elevator elevator;
 	Timer timer;
 	Autonomous autonomous;
+	RobotPosition robitPos;
 //	Camera cam = new Camera();
 
 	@Override
@@ -31,7 +33,8 @@ public class Robot extends IterativeRobot {
 		 winch = new Climber(0);
 		 elevator = new Elevator(1, 0, 1);
 		 timer = new Timer();
-		 autonomous = new Autonomous(drive);
+		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 19.75 * 76/74.87255859375);
+		 autonomous = new Autonomous(drive, robitPos);
 	   //cam.startCamera();
 	   //cam.detectObjects();
 	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
@@ -51,10 +54,8 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopPeriodic() {
-		//drive.parabolicArcade((-xbox.getAxis(4) * speedMultiplier), xbox.getAxis(1) * speedMultiplier); used with speedMultiplier
-		drive.parabolicArcade((-xbox.getAxis(4)), xbox.getAxis(1), .75);
-		//drive.linearArcade(-xbox.getLeftStick().getY(), xbox.getRightStick().getX());
-		
+		drive.parabolicArcade(xbox.getLeftStick().getX(), xbox.getLeftStick().getY(), .75);
+		robitPos.updateAnglePos();
 	/*	if(xbox.getToggle(5)){
 			speedMultiplier = .75;
 		}else{
