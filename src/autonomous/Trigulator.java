@@ -19,10 +19,10 @@ public class Trigulator {
 
 	public static double deltaAngle(Position a, Position b) {
 		double angle = angle(a, b) - a.getTheta();
-
+	
 		if (b.getTheta() < 0) {
 			return angle - 180;
-		}
+	}
 		return angle;
 	}
 
