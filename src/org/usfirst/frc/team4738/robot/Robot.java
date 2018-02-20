@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		//drive.parabolicArcade((-xbox.getAxis(4) * speedMultiplier), xbox.getAxis(1) * speedMultiplier); used with speedMultiplier
-		drive.parabolicArcade((-xbox.getAxis(4)), xbox.getAxis(1), .75);
+		
 		//drive.linearArcade(-xbox.getLeftStick().getY(), xbox.getRightStick().getX());
 		
 	/*	if(xbox.getToggle(5)){
@@ -68,7 +68,9 @@ public class Robot extends IterativeRobot {
 			*/
 	
 		if(xbox.getToggle(XboxButtons.X)){
-			drive.parabolicArcade(-(-xbox.getAxis(4)), -xbox.getAxis(1), .75);
+			drive.parabolicArcade(xbox.getRightStick().getX(), -xbox.getLeftStick().getY(), .75);
+		} else {
+			drive.parabolicArcade((-xbox.getRightStick().getX()), xbox.getLeftStick().getY(), .75);
 		}
 	}
 	
