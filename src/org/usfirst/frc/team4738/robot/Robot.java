@@ -20,22 +20,22 @@ public class Robot extends IterativeRobot {
 	XboxController xbox = new XboxController(1);
 	Compressor compressor = new Compressor(0);
 	Drive drive;
-	Climber winch;
-	Elevator elevator;
+//	Climber winch;
+//	Elevator elevator;
 	Timer timer;
 	Autonomous autonomous;
 	RobotPosition robitPos;
-//	Camera cam = new Camera();
+	Camera cam = new Camera();
 
 	@Override
 	public void robotInit() {
-		 drive = new Drive(2, 3);
-		 winch = new Climber(0);
-		 elevator = new Elevator(1, 0, 1);
+		 drive = new Drive(2,3);
+	//	 winch = new Climber(0);
+	//	 elevator = new Elevator(1, 0, 1);
 		 timer = new Timer();
-		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 19.75 * 76/74.87255859375);
+		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 18.5 );//19.75 * 76/74.87255859375
 		 autonomous = new Autonomous(drive, robitPos);
-	   //cam.startCamera();
+		 cam.startCamera();
 	   //cam.detectObjects();
 	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
 	}
@@ -63,9 +63,9 @@ public class Robot extends IterativeRobot {
 		}
 		*/
 		//drive.speedCap(xbox.getToggle(5), .75);
-		elevator.setLift(gamepad.getAxis(1));
-		elevator.setArms(gamepad.getButton(0));
-		winch.set(gamepad.getButton(2), gamepad.getButton(1));
+//		elevator.setLift(gamepad.getAxis(1));
+//		elevator.setArms(gamepad.getButton(0));
+//		winch.set(gamepad.getButton(2), gamepad.getButton(1));
 		
 	/*	if(timer.wait(105 * 1000)){
 			xbox.setRumble(RumbleType.kRightRumble, 1);
