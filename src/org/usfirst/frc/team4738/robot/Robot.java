@@ -67,8 +67,8 @@ public class Robot extends IterativeRobot {
 			xbox.setRumble(RumbleType.kLeftRumble, 1);
 			*/
 	
-		if(xbox.getToggle(3)){
-			drive.parabolicArcade((-xbox.getAxis(4)), xbox.getAxis(1) * -1, .75);
+		if(xbox.getToggle(XboxButtons.X)){
+			drive.parabolicArcade(-(-xbox.getAxis(4)), -xbox.getAxis(1), .75);
 		}
 	}
 	
