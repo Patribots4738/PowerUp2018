@@ -22,7 +22,7 @@ public class Trigulator {
 	
 		if (b.getTheta() < 0) {
 			return angle - 180;
-	}
+		}
 		return angle;
 	}
 

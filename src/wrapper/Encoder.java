@@ -1,7 +1,7 @@
 package wrapper;
 
 public class Encoder {
-	public static final double ClicksPerRotation = 256;// 2048
+	public static final double ClicksPerRotation = 2048;// 256
 	public edu.wpi.first.wpilibj.Encoder encoder;
 	private double circumference, conversionFactor;
 
@@ -35,8 +35,6 @@ public class Encoder {
 	}
 	
 	public void encoderTest() {
-		System.out.println("the pulse count is: " + encoder.getDistance());
-		System.out.println("the distance is: " +  circumference * (encoder.getDistance() / ClicksPerRotation));
-		System.out.println("the pulse count over 256 is: " + encoder.getDistance() / 256);
+		System.out.println("the distance is: " +  this.getDistance());
 	}
 }

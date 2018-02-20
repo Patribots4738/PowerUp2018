@@ -9,8 +9,8 @@ import autonomous.Smashboard;
 public class RobotPosition extends Position {
 
 	Timer timer;
-	Encoder encoderL;
-	Encoder encoderR;
+	public Encoder encoderL;
+	public Encoder encoderR;
 	Gyro gyro;
 	
 
@@ -24,9 +24,9 @@ public class RobotPosition extends Position {
 
 	public void updateAnglePos() {
 		double deltaTimer = timer.getDeltaTime() / 1000;
-		double deltaTheta = ((encoderR.encoder.getRate() / Encoder.ClicksPerRotation) - (encoderL.encoder.getRate() / Encoder.ClicksPerRotation)) / 2;
-		deltaTheta = deltaTheta / 195 * 360;
-		double calcR = -(encoderR.getSpeed() + encoderL.getSpeed()) / 2;
+//		double deltaTheta = ((encoderR.encoder.getRate() / Encoder.ClicksPerRotation) - (encoderL.encoder.getRate() / Encoder.ClicksPerRotation)) / 2;
+//		deltaTheta = deltaTheta / 195 * 360;
+		double calcR = (-(encoderR.getSpeed()) + (encoderL.getSpeed())) / 2;
 
 		//this.setTheta(this.getTheta() + deltaTheta);
 		this.setTheta(gyro.getAngle());
@@ -57,6 +57,7 @@ public class RobotPosition extends Position {
 		gyro.reset();
 		encoderR.reset();
 		encoderL.reset();
+		timer.reset();
 	}
 	
 	public void zeroReset() {
@@ -66,6 +67,7 @@ public class RobotPosition extends Position {
 		gyro.reset();
 		encoderR.reset();
 		encoderL.reset();
+		timer.reset();
 	}
 
 	// this tells the robot where it's facing
@@ -76,14 +78,6 @@ public class RobotPosition extends Position {
 	
 	public boolean isMoving() {
 		return (encoderL.getSpeed() + encoderR.getSpeed()) / 2 > .5;
-	}
-
-	public void angleTest() {
-		System.out.println("the gyro angle is: " + gyro.getAngle());
-	}
-
-	public void encoderTest() {
-		encoderL.encoderTest();
 	}
 
 }

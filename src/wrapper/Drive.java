@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Drive {
 
-	private ArrayList<VictorSP /* Spark */> motors = new ArrayList<>();
+	public ArrayList<VictorSP /* Spark */> motors = new ArrayList<>();
 
 	/**
 	 * This is a constructor you idiot - <3 Jacob
