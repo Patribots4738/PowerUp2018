@@ -26,8 +26,12 @@ public class Encoder {
 
 	public double getAngle() {
 		double clicks = encoder.getDistance();
-		clicks = (Math.abs(clicks / ClicksPerRotation) - (int) (Math.abs(clicks / ClicksPerRotation)));
+		clicks %= ClicksPerRotation;
 		return (clicks * ClicksPerRotation) / conversionFactor;
+	}
+	
+	public double getDeltaDistance(){
+		//TODO :: Write this function
 	}
 
 	public void reset() {
