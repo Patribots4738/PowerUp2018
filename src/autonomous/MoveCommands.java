@@ -22,7 +22,7 @@ public class MoveCommands {
 	public void move(double distance, double speedMultiplier, double direction) {
 		double speed = (Math.min(1, distanceToSpeed(Math.max(-1, distance / distTillDecceleration)))) * speedMultiplier;
 		//System.out.println("the motor speed is: " + speed);
-		drive.linearArcade(0, speed * direction);
+		drive.linearArcade(-0.04, speed * direction);
 		//drive.linearTank(speed * direction, (direction) * speed);
 	}
 

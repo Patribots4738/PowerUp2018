@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 		 timer = new Timer();
 		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 18.5 );//19.75 * 76/74.87255859375
 		 autonomous = new Autonomous(drive, robitPos);
-		cam.startCamera();
+		//cam.startCamera();
 	   //cam.detectObjects();
 	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
 	}

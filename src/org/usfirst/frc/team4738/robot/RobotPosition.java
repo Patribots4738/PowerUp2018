@@ -43,7 +43,7 @@ public class RobotPosition extends Position {
 
 	// this tells the robot where it is
 	public void updatePos() {
-		double encoderAverage = ( encoderR.getSpeed() + encoderL.getSpeed() ) /2; 
+		double encoderAverage = ( -encoderR.getSpeed() + encoderL.getSpeed() ) /2; 
 		double deltaTime = timer.getDeltaTime();
 		this.setY(this.getY() + ((encoderAverage * (deltaTime / 1000)) * Math.cos(this.getTheta())));
 		this.setX(this.getX() + ((encoderAverage * (deltaTime / 1000)) * Math.sin(this.getTheta())));
