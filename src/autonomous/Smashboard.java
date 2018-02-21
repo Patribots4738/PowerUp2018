@@ -10,12 +10,12 @@ public class Smashboard {
 		String data = (pos.getX() + smashboardHeight) + "," + pos.getY() + "," + pos.getTheta();
 		SmartDashboard.putString("position", data);
 	}
-	
+
 	public static void sendDestPos(Position pos) {
 		String data = (pos.getX() + smashboardHeight) + "," + pos.getY() + "," + pos.getTheta();
 		SmartDashboard.putString("destination", data);
 	}
-  
+
 	public static Position getRobotStartPos(){
 		double startPos = SmartDashboard.getNumber("start", 0);
 		Position robotPos = new Position(115 * startPos, 19);
@@ -24,4 +24,20 @@ public class Smashboard {
 		}
 		return robotPos;
 	}
+
+	// -1 for left, 1 for right
+	public static int[] getSwitchPos(){
+			String data = "llr";
+			int[] returnData = new int[3];
+			for(int i = 0; i < 3; i++){
+				if(data.charAt(i) == 'R'){
+					returnData[i] = 1;
+				} else if(data.charAt(i) == 'L'){
+					returnData[i] = -1;
+				}
+			}
+
+			return returnData;
+	}
+
 }
