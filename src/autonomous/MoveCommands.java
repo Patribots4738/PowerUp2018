@@ -7,7 +7,7 @@ public class MoveCommands {
 	double rotateSpeed;
 	double straightSpeed;
 	public Drive drive;
-	double distTillDecceleration = 40.0;
+	double distTillDecceleration = 70.0;
 	double thetaTillDecceleration = 60.0;
 
 	
@@ -21,6 +21,7 @@ public class MoveCommands {
 	// this makes the robot move, but only in a straight line
 	public void move(double distance, double speedMultiplier, double direction) {
 		double speed = (Math.min(1, distanceToSpeed(Math.max(-1, distance / distTillDecceleration)))) * speedMultiplier;
+		//System.out.println("the motor speed is: " + speed);
 		drive.linearArcade(0, speed * direction);
 		//drive.linearTank(speed * direction, (direction) * speed);
 	}
