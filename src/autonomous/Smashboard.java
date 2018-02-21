@@ -15,6 +15,7 @@ public class Smashboard {
 		String data = (pos.getX() + smashboardHeight) + "," + pos.getY() + "," + pos.getTheta();
 		SmartDashboard.putString("destination", data);
 	}
+  
 	public static Position getRobotStartPos(){
 		double startPos = SmartDashboard.getNumber("start", 0);
 		Position robotPos = new Position(115 * startPos, 19);
@@ -22,6 +23,5 @@ public class Smashboard {
 			robotPos.setX(5);
 		}
 		return robotPos;
-		
 	}
 }
