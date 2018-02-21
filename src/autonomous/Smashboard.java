@@ -1,5 +1,6 @@
 package autonomous;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Smashboard {
@@ -24,20 +25,23 @@ public class Smashboard {
 		}
 		return robotPos;
 	}
+	
+	public static int getRobotStartPosInt(){
+		return (int) Math.round(SmartDashboard.getNumber("start", 0));
+	}
 
 	// -1 for left, 1 for right
 	public static int[] getSwitchPos(){
-			String data = "llr";
-			int[] returnData = new int[3];
-			for(int i = 0; i < 3; i++){
-				if(data.charAt(i) == 'R'){
-					returnData[i] = 1;
-				} else if(data.charAt(i) == 'L'){
-					returnData[i] = -1;
-				}
+		String data = DriverStation.getInstance().getGameSpecificMessage();
+		int[] returnData = new int[data.length()];
+		for(int i = 0; i < data.length(); i++){
+			if(data.charAt(i) == 'R'){
+				returnData[i] = 1;
+			} else if(data.charAt(i) == 'L'){
+				returnData[i] = -1;
 			}
-
-			return returnData;
+		}
+		return returnData;
 	}
 
 }

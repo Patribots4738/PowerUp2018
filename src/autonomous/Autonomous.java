@@ -29,7 +29,7 @@ public class Autonomous {
 	// to our side
 	Position goingAround[] = { new Position(115, 210, normalSpeed), new Position(-100, 210, normalSpeed), new Position(-100, 168, normalSpeed), new Position(-66,168,RAMMINGSPEED) };
 	Position testing[] = {new Position(60, 0, normalSpeed) , new Position(60, 60, normalSpeed), new Position(0, 60 , normalSpeed), new Position(-10,0, normalSpeed) , new Position(-10 , 5 , 0)};
-	Position backwardsTest[] = {new Position(0,  -180, normalSpeed)};
+	Position backwardsTest[] = {new Position(0,  -140, normalSpeed)};
 	Position destPos = backwardsTest[0]; // we need to have it get the destPos from the smashboard
 
 	RobotPosition robitPos;
@@ -52,9 +52,9 @@ public class Autonomous {
 
 	
 	public void fullDebug() {
-	//	System.out.println("the delta angle is: " + Trigulator.deltaAngle(robitPos, destPos));
-	//	System.out.println("the distance is: " + Trigulator.distance(robitPos, destPos));
-	//	System.out.println("the absolute angle is: " + Trigulator.angle(robitPos, destPos));
+		System.out.println("the delta angle is: " + Trigulator.deltaAngle(robitPos, destPos));
+		System.out.println("the distance is: " + Trigulator.distance(robitPos, destPos));
+		System.out.println("the absolute angle is: " + Trigulator.angle(robitPos, destPos));
 	//	robitPos.angleTest();
 	//	System.out.println("the the point on path is: " + pointOnPath);
 	//	System.out.println("the robitPos x is: " + robitPos.getX() + "\nthe robitPos y is: " + robitPos.getY() + "\nthe robitPos theta is: " + robitPos.getTheta() + "\n");
@@ -68,15 +68,20 @@ public class Autonomous {
 		// where we told it to go
 	public void ITSALIVE() {
 
-		int switchSide = -1;
-		if(switchSide == -1) {
-			robitPos.updateAnglePos();
-			move.move(Trigulator.distance(robitPos, destPos), normalSpeed, move.moveDirection(robitPos, destPos));
-		}
+		int switchSide = Smashboard.getSwitchPos()[0] * Smashboard.getRobotStartPosInt();
+		System.out.println(switchSide);
+		robitPos.updatePos();
 		if(switchSide == 1) {
-			robitPos.updateAnglePos();
+			move.move(Trigulator.distance(robitPos, destPos), RAMMINGSPEED, move.moveDirection(robitPos, destPos));
+		}else {
 			move.move(Trigulator.distance(robitPos, destPos), slowSpeed, move.moveDirection(robitPos, destPos));
 		}
+		
+		//fullDebug();
+		
+		//robitPos.updateAnglePos();
+		//move.move(Trigulator.distance(robitPos, destPos), slowSpeed, move.moveDirection(robitPos, destPos));
+	
 
 /*		
 		if(pointOnPath >= testing.length) {
