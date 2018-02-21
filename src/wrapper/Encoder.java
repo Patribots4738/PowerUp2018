@@ -32,6 +32,7 @@ public class Encoder {
 	
 	public double getDeltaDistance(){
 		//TODO :: Write this function
+		return 0;
 	}
 
 	public void reset() {

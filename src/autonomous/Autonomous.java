@@ -29,7 +29,7 @@ public class Autonomous {
 	// to our side
 	Position goingAround[] = { new Position(115, 210, normalSpeed), new Position(-100, 210, normalSpeed), new Position(-100, 168, normalSpeed), new Position(-66,168,RAMMINGSPEED) };
 	Position testing[] = {new Position(60, 0, normalSpeed) , new Position(60, 60, normalSpeed), new Position(0, 60 , normalSpeed), new Position(-10,0, normalSpeed) , new Position(-10 , 5 , 0)};
-	Position backwardsTest[] = {new Position(0,  -170, normalSpeed)};
+	Position backwardsTest[] = {new Position(0,  -180, normalSpeed)};
 	Position destPos = backwardsTest[0]; // we need to have it get the destPos from the smashboard
 
 	RobotPosition robitPos;
@@ -52,8 +52,8 @@ public class Autonomous {
 
 	
 	public void fullDebug() {
-		System.out.println("the delta angle is: " + Trigulator.deltaAngle(robitPos, destPos));
-		System.out.println("the distance is: " + Trigulator.distance(robitPos, destPos));
+	//	System.out.println("the delta angle is: " + Trigulator.deltaAngle(robitPos, destPos));
+	//	System.out.println("the distance is: " + Trigulator.distance(robitPos, destPos));
 	//	System.out.println("the absolute angle is: " + Trigulator.angle(robitPos, destPos));
 	//	robitPos.angleTest();
 	//	System.out.println("the the point on path is: " + pointOnPath);
@@ -67,22 +67,17 @@ public class Autonomous {
 	// this makes the robot move where we want it to, and then tells it that it's
 		// where we told it to go
 	public void ITSALIVE() {
-/*
-		Position switchSide = new Position(0, -150);
-		if(Math.signum(switchSide.getY()) == Math.signum(robitPos.getY())) {
+
+		int switchSide = -1;
+		if(switchSide == -1) {
 			robitPos.updateAnglePos();
 			move.move(Trigulator.distance(robitPos, destPos), normalSpeed, move.moveDirection(robitPos, destPos));
 		}
-		if(Math.signum(switchSide.getY()) == Math.signum(robitPos.getY())) {
+		if(switchSide == 1) {
 			robitPos.updateAnglePos();
 			move.move(Trigulator.distance(robitPos, destPos), slowSpeed, move.moveDirection(robitPos, destPos));
 		}
-*/		
-		
-		
-		fullDebug();
-		robitPos.updateAnglePos();
-		move.move(Trigulator.distance(robitPos, destPos), destPos.getTheta(), move.moveDirection(robitPos, destPos));
+
 /*		
 		if(pointOnPath >= testing.length) {
 			System.out.println("Auto is over");
