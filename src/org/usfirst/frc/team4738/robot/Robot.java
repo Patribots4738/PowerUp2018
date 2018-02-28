@@ -5,11 +5,16 @@ import autonomous.Smashboard;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import vision.Camera;
+import wrapper.Constants;
 import wrapper.Drive;
+import wrapper.Encoder;
 import wrapper.Gamepad;
+import wrapper.PIDController;
+import wrapper.PIDMotor;
 import wrapper.Timer;
 import wrapper.ToggleButton;
 import wrapper.XboxController;
@@ -29,6 +34,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void robotInit() {
+		
+		PIDMotor leftMotor = new PIDMotor(
+				new Spark(Constants.LEFT_MOTOR), 
+				new Encoder(Constants.LEFT_ENCODER_PORTS[0], Constants.LEFT_ENCODER_PORTS[1]),
+				new PIDController(1, 0, 0), false);
+		
 		 drive = new Drive(2,3);
 	//	 winch = new Climber(0);
 	//	 elevator = new Elevator(1, 0, 1);

@@ -13,6 +13,7 @@ public class PIDMotor {
 		this.encoder = encoder;
 		this.controller = controller;
 		motorController.setInverted(isInverted);
+		
 	}
 	
 	public void set(double speed) {
