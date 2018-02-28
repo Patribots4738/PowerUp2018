@@ -12,7 +12,7 @@ public class Encoder {
 
 	public Encoder(int port1, int port2, double circumfrence) {
 		this(port1, port2);
-		this.circumference = circumfrence ;//radius * 2 * Math.PI;
+		this.circumference = circumfrence;
 		conversionFactor = ClicksPerRotation / 360;
 	}
 
