@@ -1,7 +1,7 @@
 package wrapper;
 
 public class Encoder {
-	public static final double ClicksPerRotation = 2048;// 256
+	public static final double ClicksPerRotation = Constants.CLICKS_PER_ROTATION;
 	public edu.wpi.first.wpilibj.Encoder encoder;
 	private double circumference, conversionFactor;
 
@@ -30,15 +30,15 @@ public class Encoder {
 		return (clicks * ClicksPerRotation) / conversionFactor;
 	}
 	
+	double lastDist = 0;
 	public double getDeltaDistance(){
-		//TODO :: Write this function
+		double deltaDistance = encoder.getDistance() - lastDist;
+		lastDist = encoder.getDistance();
+		
+		return deltaDistance;
 	}
 
 	public void reset() {
 		encoder.reset();
-	}
-	
-	public void encoderTest() {
-		System.out.println("the distance is: " +  this.getDistance());
 	}
 }

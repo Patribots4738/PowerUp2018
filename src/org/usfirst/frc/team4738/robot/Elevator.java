@@ -13,8 +13,8 @@ public class Elevator {
 	double elevatorSpeed = 1, elevatorPosition = 0;
 	Timer timer;
 	
-	public Elevator(int port, int openPort, int closePort){
-		lift = new Spark(port);
+	public Elevator(int motorPort, int openPort, int closePort){
+		lift = new Spark(motorPort);
 		arms = new Arms(openPort, closePort);
 		timer = new Timer();
 	}
