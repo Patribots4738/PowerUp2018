@@ -10,8 +10,8 @@ public class Arms {
 			close = new Solenoid(closePort);
 		}
 		public void set(boolean state){
-			open.set(state);
-			close.set(!state);
+			open.set(!state);
+			close.set(state);
 		}
 	}
 

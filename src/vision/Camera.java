@@ -23,7 +23,7 @@ public class Camera {
 			cam = CameraServer.getInstance().startAutomaticCapture();
 			cam.setFPS(30);
 			cam.setResolution(320, 240);
-			cam.setExposureManual(0);
+			cam.setExposureAuto();
 			
 			currentFrame = new Mat();
 			currentFrame.setTo(new Scalar(0,0,0));

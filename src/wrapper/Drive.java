@@ -81,9 +81,9 @@ public class Drive {
 	public void parabolicArcade(double xAxis, double yAxis, double speedMultiplier) {
 		for (int i = 0; i < motors.size(); i++) {
 			if (i % 2 == 0) {
-				motors.get(i).set(-((yAxis + xAxis)) * Math.abs(yAxis + xAxis) * speedMultiplier);
+				motors.get(i).set(((yAxis + xAxis) * Math.abs(yAxis + xAxis)) * speedMultiplier);
 			} else {
-				motors.get(i).set(((yAxis - xAxis)) * Math.abs((yAxis - xAxis)) * speedMultiplier);
+				motors.get(i).set(-((yAxis - xAxis)) * Math.abs((yAxis - xAxis)) * speedMultiplier);
 			}
 		}
 	}

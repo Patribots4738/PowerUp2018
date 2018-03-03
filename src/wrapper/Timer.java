@@ -6,6 +6,10 @@ package wrapper;
 public class Timer {
 
 	double deltaTime = 0, lastTime = 0, startTime;
+	
+	public Timer() {
+		start();
+	}
 
 	public void start() {
 		startTime = System.currentTimeMillis();

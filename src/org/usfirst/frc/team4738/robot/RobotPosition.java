@@ -24,15 +24,15 @@ public class RobotPosition extends Position {
 
 	public void updateAnglePos() {
 		double deltaTimer = timer.getDeltaTime() / 1000;
-//		double deltaTheta = ((encoderR.encoder.getRate() / Encoder.ClicksPerRotation) - (encoderL.encoder.getRate() / Encoder.ClicksPerRotation)) / 2;
-//		deltaTheta = deltaTheta / 195 * 360;
-		double calcR = (-(encoderR.getSpeed()) + (encoderL.getSpeed())) / 2;
+		double deltaTheta = (encoderL.getDeltaDistance() - encoderR.getDeltaDistance()) / 2;
+		deltaTheta = deltaTheta / 195 * 360;
+		double calcR = (encoderL.getDeltaDistance() + encoderR.getDeltaDistance()) / 2;
 
 		//this.setTheta(this.getTheta() + deltaTheta);
 		this.setTheta(gyro.getAngle());
 		
-		double deltaYPos = calcR * Math.cos(Math.toRadians(this.getTheta())) * deltaTimer;
-		double deltaXPos = calcR * Math.sin(Math.toRadians(this.getTheta())) * deltaTimer;
+		double deltaYPos = calcR * Math.cos(Math.toRadians(this.getTheta()));
+		double deltaXPos = calcR * Math.sin(Math.toRadians(this.getTheta()));
 
 		this.setX(this.getX() + deltaXPos);
 		this.setY(this.getY() + deltaYPos);
