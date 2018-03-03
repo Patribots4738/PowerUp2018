@@ -21,7 +21,8 @@ public class Gamepad implements interfaces.Gamepad{
 	public Gamepad(int port) {
 		this.port = port;
 		joystick = new Joystick(port);
-		buttons = new ToggleButton[joystick.getButtonCount() + 1];
+		System.out.println(joystick.getButtonCount());
+		buttons = new ToggleButton[joystick.getButtonCount()];
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i] = new ToggleButton();
 		}
@@ -84,7 +85,7 @@ public class Gamepad implements interfaces.Gamepad{
 		for(int i = 1; i < joystick.getButtonCount(); i++){
 			stuff += ((joystick.getRawButton(i))) + ",";
 		}
-		stuff += joystick.getPOV() + "," + (int)timer.getTime()                  /*:)*/                           ;
+		stuff += joystick.getPOV() + "," + (int)timer.getTime();
 		System.out.println(stuff);
 		return stuff;
 	}

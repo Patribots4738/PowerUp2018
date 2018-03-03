@@ -23,9 +23,10 @@ public class RobotPosition extends Position {
 	}
 
 	public void updateAnglePos() {
-		double deltaTheta = (encoderL.getDeltaDistance() - encoderR.getDeltaDistance()) / 2;
+
+		double deltaTheta = (encoderR.getDeltaDistance() - encoderL.getDeltaDistance()) / 2;
 		deltaTheta = deltaTheta / 195 * 360;
-		double calcR = (encoderL.getDeltaDistance() + encoderR.getDeltaDistance()) / 2;
+		double calcR = -(encoderR.getDeltaDistance() + encoderL.getDeltaDistance()) / 2;
 
 		//this.setTheta(this.getTheta() + deltaTheta);
 		this.setTheta(gyro.getAngle());
