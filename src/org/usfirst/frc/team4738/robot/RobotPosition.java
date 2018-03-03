@@ -23,7 +23,6 @@ public class RobotPosition extends Position {
 	}
 
 	public void updateAnglePos() {
-		double deltaTimer = timer.getDeltaTime() / 1000;
 		double deltaTheta = (encoderL.getDeltaDistance() - encoderR.getDeltaDistance()) / 2;
 		deltaTheta = deltaTheta / 195 * 360;
 		double calcR = (encoderL.getDeltaDistance() + encoderR.getDeltaDistance()) / 2;

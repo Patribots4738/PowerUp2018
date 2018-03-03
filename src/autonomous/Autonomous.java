@@ -8,7 +8,7 @@ import org.usfirst.frc.team4738.robot.*;
 public class Autonomous {
 	
 	int pointOnPath = 0;
-	double RAMMINGSPEED = 0.9;
+	double RAMMINGSPEED = -0.9;
 	double normalSpeed = 0.5;
 	double safeSpeed = 0.4;
 	double wheelCircumfrence = 19.75 * 76/74.87255859375;
@@ -28,9 +28,9 @@ public class Autonomous {
 	// these are (shockingly enough) for when we have to go around the switch to get
 	// to our side
 	Position goingAround[] = { new Position(115, 210, normalSpeed), new Position(-100, 210, normalSpeed), new Position(-100, 168, normalSpeed), new Position(-66,168,RAMMINGSPEED) };
-	Position testing[] = {new Position(60, 0, normalSpeed) , new Position(60, 60, normalSpeed), new Position(0, 60 , normalSpeed), new Position( 0,0 , normalSpeed) , new Position( 0, -30,normalSpeed)};
-	Position backwardsTest[] = {new Position(0,  -140, normalSpeed)};
-	Position destPos = testing[pointOnPath]; // we need to have it get the destPos from the smashboard
+	Position testing[] = {new Position(60, 0, normalSpeed) , new Position(60, 60, normalSpeed), new Position(0, 60 , normalSpeed), new Position( 0,0 , normalSpeed) , new Position( 0, 30, -normalSpeed)};
+	Position backwardsTest[] = {new Position(0,  140, RAMMINGSPEED)};
+	Position destPos = backwardsTest[0]; //testing[pointOnPath]; // we need to have it get the destPos from the smashboard
 
 	RobotPosition robitPos;
 	MoveCommands move;
@@ -67,7 +67,7 @@ public class Autonomous {
 	// this makes the robot move where we want it to, and then tells it that it's
 		// where we told it to go
 	public void ITSALIVE() {
-		/*
+		
 		destPos = backwardsTest[0];
 		int switchSide = Smashboard.getSwitchPos()[0] * Smashboard.getRobotStartPosInt();
 		System.out.println(switchSide);
@@ -77,9 +77,9 @@ public class Autonomous {
 		}else {
 			move.move(Trigulator.distance(robitPos, destPos), slowSpeed, move.moveDirection(robitPos, destPos));
 		}
-		*/
-
 		
+
+	/*
 		if(pointOnPath >= testing.length) {
 			System.out.println("Auto is over");
 			move.stop();
@@ -103,6 +103,7 @@ public class Autonomous {
 					destPos = testing[pointOnPath];
 				}
 			}
-		}
+			
+		} */
 	}
 }
