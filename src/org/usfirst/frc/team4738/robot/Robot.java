@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import enums.XboxButtons;
+import utils.MovingAverage;
 import vision.Camera;
 import wrapper.Drive;
 import wrapper.Gamepad;
@@ -16,8 +18,8 @@ import wrapper.XboxController;
 import org.usfirst.frc.team4738.robot.RobotPosition;
 
 public class Robot extends IterativeRobot {
-	Gamepad gamepad = new Gamepad(0);
-	XboxController xbox = new XboxController(1);
+	Gamepad gamepad;
+	XboxController xbox;
 	Compressor compressor = new Compressor(0);
 	Drive drive;
 	Climber winch;
@@ -35,9 +37,9 @@ public class Robot extends IterativeRobot {
 		 timer = new Timer();
 		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 19.75 * 76/74.87255859375);//18.5
 		 autonomous = new Autonomous(drive, robitPos);
+		 xbox = new XboxController(1);
+		 gamepad = new Gamepad(0);
 		 cam.startCamera();
-		// cam.detectObjects();
-		// cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
 	}
 
 	@Override
@@ -45,33 +47,38 @@ public class Robot extends IterativeRobot {
 			autonomous.reset();
 	}
 
+	MovingAverage left = new MovingAverage(250), right = new MovingAverage(250);
+	
 	@Override
 	public void autonomousPeriodic() {
-		autonomous.ITSALIVE();
+		//autonomous.ITSALIVE();
+		drive.linearTank(1, 1);
+		System.out.println("left = " + left.average(robitPos.encoderL.getSpeed()));
+		System.out.println("right = " + right.average(robitPos.encoderR.getSpeed()));
+		
 	}
 	
 
-	
+	double speedMultiplier = .75;
+	double direction = 1;
 	@Override
 	public void teleopPeriodic() {
-		drive.parabolicArcade(xbox.getLeftStick().getX(), xbox.getLeftStick().getY(), .75);
+		if(xbox.getButtonDown(XboxButtons.B)) {
+			direction *= -1;
+		}
+		
+		drive.parabolicArcade(xbox.getRightStick().getX(), xbox.getLeftStick().getY() * direction, speedMultiplier);
 		robitPos.updateAnglePos();
-/*		
-		if(xbox.getToggle(5)){
+		
+		if(xbox.getToggle(XboxButtons.A)){
 			speedMultiplier = .75;
 		}else{
 			speedMultiplier = .5;
-		}
-*/	
-	//	drive.speedCap(xbox.getToggle(5), .75);
-		elevator.setLift(gamepad.getAxis(1));
+		};
+		
+		elevator.setLift(-gamepad.getAxis(1));
 		elevator.setArms(gamepad.getButton(0));
 		winch.set(gamepad.getButton(2), gamepad.getButton(1));
-		
-		if(timer.wait(105 * 1000)){
-			xbox.setRumble(RumbleType.kRightRumble, 1);
-			xbox.setRumble(RumbleType.kLeftRumble, 1);
-	}
 	}
 
 	@Override
