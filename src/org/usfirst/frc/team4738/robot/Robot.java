@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import enums.XboxButtons;
 import utils.MovingAverage;
 import vision.Camera;
+import wrapper.Constants;
 import wrapper.Drive;
 import wrapper.Gamepad;
 import wrapper.Timer;
@@ -31,11 +32,17 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void robotInit() {
-		 drive = new Drive(2,3);
-		 winch = new Climber(0);
-		 elevator = new Elevator(1, 0, 1);
+		 drive = new Drive(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
+		 winch = new Climber(Constants.CLIMBER);
+		 elevator = new Elevator(Constants.ELEVATOR[0], Constants.ELEVATOR[1], Constants.ELEVATOR[2]);
 		 timer = new Timer();
-		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 18.5 );//19.75 * 76/74.87255859375
+		 robitPos = new RobotPosition(
+				 Constants.LEFT_ENCODER_PORTS[0],
+				 Constants.LEFT_ENCODER_PORTS[1],
+				 Constants.RIGHT_ENCODER_PORTS[0],
+				 Constants.RIGHT_ENCODER_PORTS[1],
+				 Constants.GYRO_PORT,
+				 Constants.WHEEL_CIRCUMFERENCE );//19.75 * 76/74.87255859375
 		 autonomous = new Autonomous(drive, robitPos);
 		 
 		 xbox = new XboxController(1);
