@@ -6,7 +6,7 @@ public class Gyro {
 	public AnalogGyro gyro;
 	MovingAverage average;
 	
-	public double conversionFactor = 90d/ 577d;//90d / 137d; 
+	public double conversionFactor = 90d / 137d;//90d/ 577d;
 
 	public Gyro(int port) {
 		// gyro = new ADXRS450_Gyro(Port.kMXP);

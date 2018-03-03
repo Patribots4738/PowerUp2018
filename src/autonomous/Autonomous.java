@@ -28,9 +28,9 @@ public class Autonomous {
 	// these are (shockingly enough) for when we have to go around the switch to get
 	// to our side
 	Position goingAround[] = { new Position(115, 210, normalSpeed), new Position(-100, 210, normalSpeed), new Position(-100, 168, normalSpeed), new Position(-66,168,RAMMINGSPEED) };
-	Position testing[] = {new Position(60, 0, normalSpeed) , new Position(60, 60, normalSpeed), new Position(0, 60 , normalSpeed), new Position(-10,0, normalSpeed) , new Position(-10 , 5 , 0)};
+	Position testing[] = {new Position(60, 0, normalSpeed) , new Position(60, 60, normalSpeed), new Position(0, 60 , normalSpeed), new Position( 0,0 , normalSpeed) , new Position( 0, -30,normalSpeed)};
 	Position backwardsTest[] = {new Position(0,  -140, normalSpeed)};
-	Position destPos = backwardsTest[0]; // we need to have it get the destPos from the smashboard
+	Position destPos = testing[pointOnPath]; // we need to have it get the destPos from the smashboard
 
 	RobotPosition robitPos;
 	MoveCommands move;
@@ -67,7 +67,8 @@ public class Autonomous {
 	// this makes the robot move where we want it to, and then tells it that it's
 		// where we told it to go
 	public void ITSALIVE() {
-
+		/*
+		destPos = backwardsTest[0];
 		int switchSide = Smashboard.getSwitchPos()[0] * Smashboard.getRobotStartPosInt();
 		System.out.println(switchSide);
 		robitPos.updatePos();
@@ -76,14 +77,9 @@ public class Autonomous {
 		}else {
 			move.move(Trigulator.distance(robitPos, destPos), slowSpeed, move.moveDirection(robitPos, destPos));
 		}
-		
-		//fullDebug();
-		
-		//robitPos.updateAnglePos();
-		//move.move(Trigulator.distance(robitPos, destPos), slowSpeed, move.moveDirection(robitPos, destPos));
-	
+		*/
 
-/*		
+		
 		if(pointOnPath >= testing.length) {
 			System.out.println("Auto is over");
 			move.stop();
@@ -96,11 +92,10 @@ public class Autonomous {
 		Smashboard.sendDestPos(destPos);
 		Smashboard.sendRobotPos(robitPos);
 		
-		
 	//	fullDebug();
 
 		move.rotate(deltaAngle, destPos.getTheta());
-		if(Math.abs(deltaAngle) < 7) {
+		if(Math.abs(deltaAngle) < 2) {
 			move.move(distance, destPos.getTheta(), move.moveDirection(robitPos, destPos));
 			if(distance < 2) {
 				if(pointOnPath < testing.length - 1) {
@@ -109,6 +104,5 @@ public class Autonomous {
 				}
 			}
 		}
-		*/
 	}
 }

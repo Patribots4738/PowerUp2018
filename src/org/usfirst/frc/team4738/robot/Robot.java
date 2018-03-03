@@ -20,8 +20,8 @@ public class Robot extends IterativeRobot {
 	XboxController xbox = new XboxController(1);
 	Compressor compressor = new Compressor(0);
 	Drive drive;
-//	Climber winch;
-//	Elevator elevator;
+	Climber winch;
+	Elevator elevator;
 	Timer timer;
 	Autonomous autonomous;
 	RobotPosition robitPos;
@@ -30,14 +30,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		 drive = new Drive(2,3);
-	//	 winch = new Climber(0);
-	//	 elevator = new Elevator(1, 0, 1);
+		 winch = new Climber(0);
+		 elevator = new Elevator(1, 0, 1);
 		 timer = new Timer();
-		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 18.5 );//19.75 * 76/74.87255859375
+		 robitPos = new RobotPosition(0 , 1 , 2 , 3 , 1 , 19.75 * 76/74.87255859375);//18.5
 		 autonomous = new Autonomous(drive, robitPos);
-		//cam.startCamera();
-	   //cam.detectObjects();
-	   //cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
+		 cam.startCamera();
+		// cam.detectObjects();
+		// cam.enableObjectDetection(focalLength, actualHeight, FOV, erode_size, dialate_size, upper, lower);	
 	}
 
 	@Override
@@ -56,23 +56,23 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		drive.parabolicArcade(xbox.getLeftStick().getX(), xbox.getLeftStick().getY(), .75);
 		robitPos.updateAnglePos();
-	/*	if(xbox.getToggle(5)){
+/*		
+		if(xbox.getToggle(5)){
 			speedMultiplier = .75;
 		}else{
 			speedMultiplier = .5;
 		}
-		*/
-		//drive.speedCap(xbox.getToggle(5), .75);
-//		elevator.setLift(gamepad.getAxis(1));
-//		elevator.setArms(gamepad.getButton(0));
-//		winch.set(gamepad.getButton(2), gamepad.getButton(1));
+*/	
+	//	drive.speedCap(xbox.getToggle(5), .75);
+		elevator.setLift(gamepad.getAxis(1));
+		elevator.setArms(gamepad.getButton(0));
+		winch.set(gamepad.getButton(2), gamepad.getButton(1));
 		
-	/*	if(timer.wait(105 * 1000)){
+		if(timer.wait(105 * 1000)){
 			xbox.setRumble(RumbleType.kRightRumble, 1);
 			xbox.setRumble(RumbleType.kLeftRumble, 1);
-			*/
 	}
-	
+	}
 
 	@Override
 	public void testPeriodic() {
