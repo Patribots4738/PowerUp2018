@@ -40,8 +40,8 @@ public class Robot extends IterativeRobot {
 		 robitPos = new RobotPosition(
 				 Constants.LEFT_ENCODER_PORTS[0],
 				 Constants.LEFT_ENCODER_PORTS[1],
-				 Constants.RIGHT_ENCODER_PORTS[0],
 				 Constants.RIGHT_ENCODER_PORTS[1],
+				 Constants.RIGHT_ENCODER_PORTS[0],
 				 Constants.GYRO_PORT,
 				 Constants.WHEEL_CIRCUMFERENCE );//19.75 * 76/74.87255859375
 
@@ -69,9 +69,10 @@ public class Robot extends IterativeRobot {
 	
 
 	double speedMultiplier = .75;
-	double direction = 1;
+	double direction = -1;
 	@Override
 	public void teleopPeriodic() {
+		
 		if(xbox.getButtonDown(XboxButtons.B)) {
 			direction *= -1;
 		}

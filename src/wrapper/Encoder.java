@@ -32,11 +32,13 @@ public class Encoder {
 		return (clicks * ClicksPerRotation) / conversionFactor;
 	}
 	
+	
+	public double distance = 0;
 	double lastDist = 0;
 	public double getDeltaDistance(){
-		double deltaDistance = encoder.getDistance() - lastDist;
-		lastDist = encoder.getDistance();
-		
+		double deltaDistance = getDistance() - lastDist;
+		lastDist = getDistance();
+		distance += deltaDistance;
 		return deltaDistance;
 	}
 

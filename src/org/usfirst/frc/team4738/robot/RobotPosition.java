@@ -22,12 +22,17 @@ public class RobotPosition extends Position {
 		
 	}
 
+	
+	double leftdist = 0, rightdist = 0;
 	public void updateAnglePos() {
 
 		double deltaTheta = (encoderR.getDeltaDistance() - encoderL.getDeltaDistance()) / 2;
-		deltaTheta = deltaTheta / 195 * 360;
-		double calcR = -(encoderR.getDeltaDistance() + encoderL.getDeltaDistance()) / 2;
-
+		double calcR = (encoderR.getDeltaDistance() + encoderL.getDeltaDistance()) / 2;
+		
+		System.out.println(encoderR.distance + " " + encoderR.getDeltaDistance());
+		System.out.println(encoderL.distance + " " + encoderL.getDeltaDistance());
+		System.out.println(calcR + "\n");		
+		
 		//this.setTheta(this.getTheta() + deltaTheta);
 		this.setTheta(gyro.getAngle());
 		
